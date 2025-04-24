@@ -1,0 +1,208 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background:#8BC6EC;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .background-container {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-bottom:30px;
+        }
+
+        .reg-box {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 900px;
+            color: white;
+        }
+
+        .reg-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: white;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+            
+        }
+
+        .form-group.col-md-6 {
+            width: 48%; 
+            
+        }
+
+        .signup-input,
+        .form-control-file {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+
+        .signup-button {
+            width: 84%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: black;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .signup-button:hover {
+            background-color: grey;
+        }
+
+        .text-danger {
+            font-size: 13px;
+            color: red;
+        }
+
+      
+      
+        @media (max-width: 767px) {
+            .form-group.col-md-6 {
+                width: 100%;
+            }
+        }
+    </style>
+    <div class="background-container">
+        <div class="reg-box">
+            <h2>AGENT</h2>
+            <form action="{% url 'add_agent' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for msg in messages %}
+                <div class="alert alert-success mt-3" role="alert">
+                    {{ msg }}
+                </div>
+                {% endfor %}
+    
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="fname" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="lname" placeholder="Last Name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" id="username" class="form-control signup-input" name="uname" placeholder="Username" required>
+                        <span id="error-username" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="email" id="email" class="form-control signup-input" name="mail" placeholder="Email Address" required>
+                        <span id="error-email" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" id="phone" class="form-control signup-input" name="phone" placeholder="Phone Number" required>
+                        <span id="error-phone" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="number" class="form-control signup-input" name="age" placeholder="Age" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select class="form-control signup-input" name="gender" required>
+                            <option value="" disabled selected>Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="address" placeholder="Address" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="state" placeholder="State" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="country" placeholder="Country" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="pin_code" placeholder="Pin Code" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control signup-input" name="location" placeholder="Location" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="image" class="form-label">Upload Profile Picture</label>
+                    
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" required>
+                        <label class="custom-file-label" for="image">Choose file</label>
+                    </div>
+                </div>
+                </div>
+             
+            
+                <button type="submit" class="btn signup-button">ADD</button>
+            </form>
+
+           
+        </div>
+    </div>
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+            let fileName = e.target.files[0] ? e.target.files[0].name : 'Choose file';
+            e.target.nextElementSibling.innerText = fileName;
+        });
+    </script>
+<script src="{% static 'js/validate.js' %}"></script>
+{% endblock %}

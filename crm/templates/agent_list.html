@@ -1,0 +1,155 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to right, #8BC6EC, #9599E2);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px 15px;
+    }
+
+    .agent-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .agent-card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease;
+    }
+
+    .agent-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .agent-image {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+    .agent-card-body {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .agent-card-body h5 {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+
+    .agent-card-body p {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .card-buttons {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        padding: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn-card {
+        flex: 1 1 45%;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+    }
+
+    .btn-card:hover {
+        background-color: #555;
+    }
+
+    .no-agents {
+        text-align: center;
+        color: white;
+        font-size: 1.2rem;
+        margin-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+        .agent-card img {
+            max-height: 220px;
+        }
+
+        .agent-card-body h5 {
+            font-size: 1.1rem;
+        }
+
+        .agent-card-body p {
+            font-size: 0.95rem;
+        }
+
+        .btn-card {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 15px 10px;
+        }
+
+        .agent-card img {
+            max-height: 180px;
+        }
+
+        .btn-card {
+            font-size: 0.9rem;
+            padding: 10px 8px;
+        }
+    }
+</style>
+
+<div class="container">
+    <center>
+        <h1 style="font-size: 2.5rem; color:white; font-weight: bold;">AGENTS</h1>
+    </center>
+    {% if agents %}
+        <div class="agent-container">
+            {% for agent in agents %}
+            <div class="agent-card mb-2">
+                <img src="{{ agent.profileimage.url }}" class="agent-image" alt="Profile Picture">
+                <div class="agent-card-body">
+                    <h5>{{ agent.user.first_name }} {{ agent.user.last_name }}</h5>
+                    <p><strong>Username:</strong> {{ agent.user.username }}</p>
+                </div>
+                <div class="card-buttons">
+                    <a href="{% url 'agent_detail' agent.id %}" class="btn-card">PROFILE</a>
+                    <a href="{% url 'delete_agent' agent.id %}" class="btn-card">DELETE</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-agents">No agents available at the moment.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

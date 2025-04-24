@@ -1,0 +1,120 @@
+{% extends 'admin_nav.html' %}
+{% block content %}
+<style>
+    body {
+        background: #8BC6EC;
+        min-height: 100vh;
+    }
+
+    h2 {
+        margin-top: 20px;
+        color: #0c90ab;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .table {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    .thead-dark th {
+        background-color: #0c90ab;
+        color: white;
+        text-align: center;
+    }
+
+    .table td, .table th {
+        vertical-align: middle;
+        text-align: center;
+        color: white;
+        padding: 10px;
+    }
+
+    .btn-light {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 30px;
+        padding: 10px 20px;
+        font-weight: 600;
+        background-color: #ffffff;
+        border: 2px solid #0c90ab;
+        color: #0c90ab;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+        background-color: #0c90ab;
+        color: white;
+    }
+
+    .no-clients {
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .table td, .table th {
+            font-size: 0.9rem;
+            padding: 8px;
+        }
+
+        .btn-light {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<div class="container mt-5">
+    <h2>Clients under Campaign: {{ campaign.title }}</h2>
+
+    {% if clients %}
+        <div class="table-wrapper">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Profession</th>
+                        <th>Annual Income</th>
+                        <th>Has Kids</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <td>{{ client.name }}</td>
+                            <td>{{ client.phone }}</td>
+                            <td>{{ client.profession }}</td>
+                            <td>{{ client.annual_income }}</td>
+                            <td>{{ client.has_kids|yesno:"Yes,No" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="no-clients">No clients are associated with this campaign.</p>
+    {% endif %}
+
+    <a href="{% url 'campaign_list' %}" class="btn btn-light">← Back to Campaigns</a>
+</div>
+{% endblock %}

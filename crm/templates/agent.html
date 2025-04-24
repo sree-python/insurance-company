@@ -1,0 +1,193 @@
+{% extends 'agent_nav.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    html, body {
+        height: 100%; 
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-image: url("{% static 'image/agent.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+        padding-top: 100px;
+    }
+
+    h1 {
+        background-color: rgba(0, 0, 0, 0.6);
+        display: inline-block;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-img-top {
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 20px;
+        color: #333;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #0c90ab;
+        border-bottom: 2px solid #ffc107;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .card-tagline {
+        font-size: 0.95rem;
+        font-style: italic;
+        color: #555;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+    }
+
+    @media (min-width: 992px) {
+        .row.g-4 {
+            flex-wrap: nowrap !important;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .card-img-top {
+            height: 160px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+        }
+
+        .card-tagline {
+            font-size: 0.9rem;
+        }
+
+        .row {
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card-img-top {
+            height: 140px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+        }
+
+        .card-tagline {
+            font-size: 0.85rem;
+        }
+
+        .row {
+            gap: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        body {
+            padding-top: 60px;
+        }
+
+        .card-img-top {
+            height: 120px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .card-tagline {
+            font-size: 0.8rem;
+        }
+
+        .row {
+            gap: 10px;
+        }
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="{% static 'image/car.png' %}" class="card-img-top" alt="Car Insurance">
+                <div class="card-body">
+                    <h5 class="card-title">Car</h5>
+                    <p class="card-tagline">Comprehensive coverage for your vehicle, ensuring protection on the road.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="{% static 'image/house.png' %}" class="card-img-top" alt="Home Insurance">
+                <div class="card-body">
+                    <h5 class="card-title">Home</h5>
+                    <p class="card-tagline">Protect your home and belongings with the right coverage for peace of mind.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="{% static 'image/life.png' %}" class="card-img-top" alt="Life Insurance">
+                <div class="card-body">
+                    <h5 class="card-title">Life</h5>
+                    <p class="card-tagline">Secure the future of your loved ones with comprehensive life insurance plans.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="{% static 'image/health.png' %}" class="card-img-top" alt="Health Insurance">
+                <div class="card-body">
+                    <h5 class="card-title">Health</h5>
+                    <p class="card-tagline">Ensure your well-being with a variety of health insurance options for you and your family.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

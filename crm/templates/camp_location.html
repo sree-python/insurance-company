@@ -1,0 +1,83 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background:#8BC6EC;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .map-container {
+        width: 90%; 
+        max-width: 1000px; 
+        height: 70vh; 
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 3px solid #fff;
+        background: #fff;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+  
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .map-container {
+            height: 50vh; 
+        }
+
+        iframe {
+            height: 100%; 
+        }
+    }
+
+ 
+    @media (max-width: 480px) {
+        .map-container {
+            height: 40vh; 
+        }
+
+        iframe {
+            height: 100%; 
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2760.8291206719773!2d75.3745359157068!3d11.877072205169833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1745174054489!5m2!1sen!2sin" 
+            allowfullscreen 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
+
+{% endblock %}

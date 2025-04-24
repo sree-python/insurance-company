@@ -1,0 +1,120 @@
+{% extends 'admin_nav.html' %}
+
+{% block content %}
+<style>
+body{
+    height:120vh;
+    background: #8BC6EC;
+}
+
+    .section {
+        
+        color: white;
+        padding: 40px 20px;
+        border-radius: 12px;
+        margin-top: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .section h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: bold;
+        color: #00d4ff;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        min-width: 700px;
+        background-color: white;
+        color: #333;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse;
+    }
+
+    .thead-dark th {
+        background-color: #0c90ab;
+        color: white;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .table td, .table th {
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    .no-data {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-top: 20px;
+        color: #eee;
+    }
+
+    @media screen and (max-width: 768px) {
+        .section {
+            padding: 30px 10px;
+        }
+
+        .table {
+            font-size: 14px;
+            min-width: 100%;
+        }
+
+        .table-wrapper {
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .table {
+            font-size: 13px;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="section">
+        <h3>All Clients</h3>
+
+        {% if all_clients %}
+            <div class="table-wrapper">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Profession</th>
+                            <th>Annual Income</th>
+                            <th>Has Kids</th>
+                            <th>Campaign Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in all_clients %}
+                            <tr>
+                                <td>{{ client.name }}</td>
+                                <td>{{ client.phone }}</td>
+                                <td>{{ client.profession }}</td>
+                                <td>{{ client.annual_income }}</td>
+                                <td>{{ client.has_kids|yesno:"Yes,No" }}</td>
+                                <td>{{ client.campaign_status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="no-data">No clients found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+
+  <style>
+    body {
+      background-image: url("{% static 'image/admin.png' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      padding: 20px 0;
+      font-size: 14px;
+      background: black;
+    }
+  </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col">
+
+  <button id="menu-btn" class="block md:hidden text-white focus:outline-none p-4">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+
+  <div class="flex flex-1">
+
+
+    <aside id="sidebar" class="w-64 shadow-md fixed md:relative inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50 bg-black text-white">
+      <div class="p-6 font-bold text-xl border-b border-gray-700 flex items-center space-x-3">
+        <img src="{% static 'image/logo.png' %}" alt="Logo" class="h-10 w-auto">
+        <span>Admin Dashboard</span>
+      </div>
+      <nav class="p-4 space-y-2">
+        <a href="{% url 'admin_dashboard' %}" class="block px-4 py-2 rounded hover:bg-gray-700">DASHBOARD</a>
+        <a href="{% url 'add_agent' %}" class="block px-4 py-2 rounded hover:bg-gray-700">ADD AGENTS</a>
+        <a href="{% url 'agent_list' %}" class="block px-4 py-2 rounded hover:bg-gray-700">VIEW AGENTS</a>
+        <a href="{% url 'add_campaign' %}" class="block px-4 py-2 rounded hover:bg-gray-700">ADD CAMPAIGNS</a>
+        <a href="{% url 'campaign_list' %}" class="block px-4 py-2 rounded hover:bg-gray-700">VIEW CAMPAIGNS</a>
+        <a href="{% url 'logoutfn' %}" class="block px-4 py-2 rounded hover:bg-gray-700 text-red-400 font-semibold">LOGOUT</a>
+      </nav>
+    </aside>
+
+
+    <div id="overlay" class="fixed inset-0 bg-white z-40 hidden md:hidden"></div>
+
+  
+    <main class="flex-1 p-6 sm:p-8 mt-4 md:mt-0">
+      <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-700">Overview</h1>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+          <div class="text-gray-600 text-lg">Total Agents</div>
+          <div class="text-3xl font-extrabold text-indigo-600 mt-2">{{ total_agents }}</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+          <div class="text-gray-600 text-lg">Total Clients</div>
+          <div class="text-3xl font-extrabold text-green-600 mt-2">{{ total_clients }}</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+          <div class="text-gray-600 text-lg">Total Campaigns</div>
+          <div class="text-3xl font-extrabold text-pink-600 mt-2">{{ total_campaigns }}</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+  <footer class="bg-black  mt-auto">
+    <p>&copy; 2025 SureCover Insurance. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>

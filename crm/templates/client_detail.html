@@ -1,0 +1,81 @@
+{% extends 'agent_nav.html' %}
+{% block content %}
+<style>
+    body{
+        background-color: #8BC6EC;
+    }
+    .client-detail-container {
+        background-color: #8BC6EC;
+        max-width: 800px;
+        margin: 40px auto;
+       
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .client-detail-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .client-detail-container p {
+        font-size: 16px;
+        line-height: 1.6;
+        border-bottom: 1px solid #ddd;
+        padding: 8px 0;
+    }
+
+    .client-detail-container p strong {
+        color: #444;
+        display: inline-block;
+        width: 240px;
+    }
+
+    .back-button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #555;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #333;
+    }
+</style>
+
+<div class="client-detail-container">
+    <h2>{{ client.name }}</h2>
+    <hr>
+    <p><strong>Phone:</strong> {{ client.phone }}</p>
+    <p><strong>Address:</strong> {{ client.address }}</p>
+    <p><strong>Age:</strong> {{ client.age }}</p>
+    <p><strong>DOB:</strong> {{ client.dob }}</p>
+    <p><strong>Qualification:</strong> {{ client.qualification }}</p>
+    <p><strong>Annual Income:</strong> ₹{{ client.annual_income }}</p>
+    <p><strong>Aadhar Card:</strong> {{ client.adhar_card }}</p>
+    <p><strong>PAN Card:</strong> {{ client.pan_card }}</p>
+    <p><strong>Has Kids:</strong> {{ client.has_kids|yesno:"Yes,No" }}</p>
+    <p><strong>Source of Information:</strong> {{ client.source_of_information }}</p>
+    <p><strong>Customer Service Satisfaction:</strong> {{ client.customer_service_satisfaction }}</p>
+    <p><strong>Claim Satisfaction:</strong> {{ client.claim_satisfaction }}</p>
+    <p><strong>Insurance Markup Area:</strong> {{ client.insurance_markup_area }}</p>
+    <p><strong>Agent Presented Policies:</strong> {{ client.agent_visited_policy }}</p>
+    <p><strong>Willing to Purchase:</strong> {{ client.willingness_to_purchase|yesno:"Yes,No" }}</p>
+    <p><strong>Willing to Switch:</strong> {{ client.willingness_to_switch|yesno:"Yes,No" }}</p>
+    <p><strong>Customer Preferences:</strong> {{ client.customer_preferences }}</p>
+    <p><strong>Existing Company:</strong> {{ client.existing_company_name }}</p>
+    <p><strong>Existing Insurance:</strong> {{ client.existing_insurance_name }}</p>
+    <p><strong>Existing Claim Status:</strong> {{ client.existing_claim_status }}</p>
+
+    <a href="{% url 'list_clients' %}" class="back-button">Back to List</a>
+</div>
+{% endblock %}

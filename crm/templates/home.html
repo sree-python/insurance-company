@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {% load static %}
+
+    <style>
+        html, body {
+            min-height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+        }
+
+        .navbar {
+            background-color: black !important;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+        #logo-img {
+            height: 40px;
+            max-width: 100%;
+        }
+
+        .container1 {
+            background: url('{% static "image/home.png" %}') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            height: 100vh;
+            transition: background-image 0.3s ease-in-out;
+        }
+
+        .container1 h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            margin-top: 150px;
+            font-weight: bold;
+        }
+
+        .container1 p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            border: none;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .styled-heading {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    color: #2c3e50;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+        .card-title {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffc107;
+            width: 100%;
+        }
+
+        .card-tagline {
+            font-size: 1rem;
+            text-align: center;
+            color: #777;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+
+        footer {
+            background:black;
+            color: white;
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: auto;
+        }
+
+        .footer-copy p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-link {
+                margin-right: 0;
+                padding: 8px 10px;
+                text-align: center;
+            }
+
+            .navbar-nav {
+                align-items: center;
+            }
+
+            footer {
+                font-size: 14px;
+            }
+
+            .container1 {
+                background: url('{% static "image/hopo.png" %}') no-repeat center center/cover;
+                padding: 80px 20px;
+                height: auto;
+            }
+
+            .container1 h1 {
+                font-size: 2rem;
+            }
+
+            .container1 p {
+                font-size: 1rem;
+            }
+
+            .card {
+                height: auto;
+                margin-bottom: 15px;
+            }
+
+            .card-img-top {
+                height: 150px;
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .card-tagline {
+                font-size: 0.9rem;
+                color: #555;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container1 {
+                padding: 60px 20px; 
+                height: auto;
+            }
+
+            .container1 h1 {
+                font-size: 1.5rem;
+            }
+
+            .container1 p {
+                font-size: 0.875rem;
+            }
+
+            .card-img-top {
+                height: 120px;
+            }
+
+            .card-body {
+                padding: 10px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-tagline {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'image/logo.png' %}" alt="logo" id="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto text-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'loginfn' %}">LOGIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">ABOUT</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container1">
+        <h1>Welcome to SureCover Insurance</h1>
+        <p>Your trusted partner for safeguarding what matters most. At SueCover Insurance, we offer comprehensive coverage tailored to your needs, ensuring you and your family are always protected. Explore our range of plans and let us help you secure a bright future.</p>
+    </div>
+
+    <div class="container my-5">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/car.png' %}" class="card-img-top" alt="Car Insurance">
+                    <div class="card-body">
+                        <h5 class="card-title">Car</h5>
+                        <p class="card-tagline">Comprehensive coverage for your vehicle, ensuring protection on the road.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/house.png' %}" class="card-img-top" alt="Home Insurance">
+                    <div class="card-body">
+                        <h5 class="card-title">Home</h5>
+                        <p class="card-tagline">Protect your home and belongings with the right coverage for peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/life.png' %}" class="card-img-top" alt="Life Insurance">
+                    <div class="card-body">
+                        <h5 class="card-title">Life</h5>
+                        <p class="card-tagline">Secure the future of your loved ones with comprehensive life insurance plans.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/health.png' %}" class="card-img-top" alt="Health Insurance">
+                    <div class="card-body">
+                        <h5 class="card-title">Health</h5>
+                        <p class="card-tagline">Ensure your well-being with a variety of health insurance options for  your family.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container my-5">
+        <h1 class="styled-heading">What's New</h1>
+        <div class="row text-center">
+        
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/img1.png' %}" class="card-img-top" alt="Level Sum Assured">
+                    <div class="card-body">
+                        <h5 class="card-title">Level Sum Assured</h5>
+                        <p class="card-tagline">Choose a fixed sum assured throughout the policy term, ensuring consistent protection for your loved ones.</p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/img2.png' %}" class="card-img-top" alt="Increasing Sum Assured">
+                    <div class="card-body">
+                        <h5 class="card-title">Increasing Sum Assured</h5>
+                        <p class="card-tagline">Opt for a sum assured that increases over time, keeping pace with inflation and changing needs.</p>
+                    </div>
+                </div>
+            </div>
+    
+         
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/img3.png' %}" class="card-img-top" alt="Flexible Premium Options">
+                    <div class="card-body">
+                        <h5 class="card-title">Flexible Premium Options</h5>
+                        <p class="card-tagline">Choose between Single, Regular, or Limited premium payment options to suit your financial preferences.</p>
+                    </div>
+                </div>
+            </div>
+    
+       
+            <div class="col-md-3 mb-4">
+                <div class="card shadow border-0">
+                    <img src="{% static 'image/img4.png' %}" class="card-img-top" alt="Benefits in Instalments">
+                    <div class="card-body">
+                        <h5 class="card-title">Benefits in Instalments</h5>
+                        <p class="card-tagline">Opt to receive your policy benefits in easy instalments for greater financial flexibility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <footer>
+        <div class="footer-copy">
+            <p>&copy; 2025 SureCover Insurance. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

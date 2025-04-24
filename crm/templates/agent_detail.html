@@ -1,0 +1,131 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background:#8BC6EC;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin:  auto;
+        padding: 20px;
+    }
+
+    .agent-detail-card {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .agent-image {
+    width: 100%;
+    height: auto; 
+    max-height: 450px; 
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+    .agent-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .agent-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .agent-info p {
+        margin: 0;
+    }
+
+    .buttons {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-custom {
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: grey;
+    }
+
+
+    @media (max-width: 768px) {
+        .agent-info {
+            grid-template-columns: 1fr;
+        }
+        .agent-image {
+        max-height: 300px;
+    }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 10px;
+        }
+
+        .agent-name {
+            font-size: 20px;
+        }
+
+        .btn-custom {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
+<div class="container">
+    <center><h1 style="font-size: 36px; color:white; font-weight: bold;">AGENT DETAILS</h1></center>
+    <div class="agent-detail-card">
+        <img src="{{ agent.profileimage.url }}" alt="Agent Picture" class="agent-image">
+        <div class="agent-name">{{ agent.user.first_name }} {{ agent.user.last_name }}</div>
+
+        <div class="agent-info">
+            <p><strong>Username:</strong> {{ agent.user.username }}</p>
+            <p><strong>Age:</strong> {{ agent.age }}</p>
+            <p><strong>Gender:</strong> {{ agent.gender }}</p>
+            <p><strong>Email:</strong> {{ agent.user.email }}</p>
+            <p><strong>Phone Number:</strong> {{ agent.phone }}</p>
+            <p><strong>Address:</strong> {{ agent.address }}</p>
+            <p><strong>State:</strong> {{ agent.state }}</p>
+            <p><strong>Location:</strong> {{ agent.location }}</p>
+            <p><strong>Country:</strong> {{ agent.country }}</p>
+            <p><strong>Pin Code:</strong> {{ agent.pin_code }}</p>
+        </div>
+
+        <div class="buttons">
+            <a href="{% url 'agent_edit' agent.id %}" class="btn-custom">EDIT</a>
+            <a href="{% url 'agent_location' %}" class="btn-custom">LOCATION</a>
+            <a href="{% url 'agent_clients_view' agent.user.id %}" class="btn-custom">VIEW CLIENTS</a>
+            <a href="{% url 'agent_list' %}" class="btn-custom">BACK TO AGENTS LIST</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,217 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#8BC6EC;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.background-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom:30px;
+}
+
+.reg-box {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 900px;
+    color: white;
+}
+
+.reg-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-group.col-md-6 {
+    width: 48%; 
+}
+
+.signup-input,
+.form-control-file {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.signup-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: black;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+    background-color: grey;
+}
+
+.text-danger {
+    font-size: 13px;
+    color: red;
+}
+
+.responsive-img {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    .form-group.col-md-6 {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="background-container">
+    <div class="reg-box">
+        <h2 class="text-center mb-4">UPDATE</h2>
+        {% for msg in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        <form action="{% url 'agent_edit' agent.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group text-center">
+                <img src="{{ agent.profileimage.url }}" alt="Profile Image" class="responsive-img">
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name="fname" placeholder="First Name" value="{{ agent.user.first_name }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="lname" placeholder="Last Name" value="{{ agent.user.last_name }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="uname" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="uname" placeholder="Username" value="{{ agent.user.username }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="mail" placeholder="Email Address" value="{{ agent.user.email }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="number" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{ agent.phone }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" class="form-control" name="age" placeholder="Age" value="{{ agent.age }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select name="gender" class="form-control" required>
+                        <option value="" disabled {% if not agent.gender %}selected{% endif %}>Gender</option>
+                        <option value="Male" {% if agent.gender == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if agent.gender == 'Female' %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if agent.gender == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{ agent.address }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="state" class="form-label">State</label>
+                    <input type="text" class="form-control" name="state" placeholder="State" value="{{ agent.state }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" class="form-control" name="country" placeholder="Country" value="{{ agent.country }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="pin-code" class="form-label">Pin code</label>
+                    <input type="text" class="form-control" name="pin_code" placeholder="Pin Code" value="{{ agent.pin_code }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" name="location" placeholder="Location" value="{{ agent.location }}" required>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="image" class="form-label">Upload Profile Picture</label>
+                
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" required>
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+            </div>
+             
+       <button type="submit" class="btn signup-button">UPDATE</button>
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

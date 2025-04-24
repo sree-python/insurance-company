@@ -1,0 +1,332 @@
+{% extends 'agent_nav.html' %}
+{% load static %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #8BC6EC;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-top: 20px;
+    }
+
+    .form-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    form label {
+        font-size: 16px;
+        color: #333;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .input-group {
+        width: 48%;
+        margin-bottom: 20px;
+        position: relative; 
+    }
+
+    .input-group.full-width {
+        width: 100%;
+    }
+
+    form input[type="text"],
+    form input[type="number"],
+    form input[type="date"],
+    form textarea,
+    form select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="number"]:focus,
+    form input[type="date"]:focus,
+    form select:focus,
+    form textarea:focus {
+        outline: none;
+        border-color: #5c9fff;
+    }
+
+    form textarea {
+        resize: vertical;
+        height: 100px;
+    }
+
+    .error-msg {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+        height: 16px;
+        position: absolute;
+        bottom: -20px; 
+        left: 0;
+        width: 100%;
+        text-align: left; 
+    }
+
+    button[type="submit"] {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: grey;
+    }
+
+    @media screen and (max-width: 768px) {
+        .input-group {
+            width: 100%;
+        }
+
+        form {
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        h2 {
+            font-size: 18px;
+        }
+
+        .input-group {
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+</style>
+
+<body>
+    <div class="form-container">
+        <h2>ADD CLIENTS</h2>
+        {% for msg in messages %}
+        <div class="alert alert-success mt-3" role="alert">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group half-width">
+                <label>Name:</label>
+                <input type="text" name="name" required><br>
+            </div>
+
+            <div class="input-group half-width">
+                <label>Phone:</label>
+                <input type="text" name="phone" required>
+                <span class="error-msg" id="phone-error"></span><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Address:</label>
+                <textarea name="address" required></textarea><br>
+            </div>
+
+            <div class="input-group">
+                <label>Age:</label>
+                <input type="number" name="age" required><br>
+            </div>
+
+            <div class="input-group">
+                <label>Date of Birth:</label>
+                <input type="date" name="dob" required><br>
+            </div>
+
+            <div class="input-group">
+                <label>Profession:</label>
+                <input type="text" name="profession"><br>
+            </div>
+
+            <div class="input-group">
+                <label>Qualification:</label>
+                <input type="text" name="qualification"><br>
+            </div>
+
+            <div class="input-group">
+                <label>Annual Income:</label>
+                <input type="number" name="annual_income" step="0.01"><br>
+            </div>
+
+            <div class="input-group">
+                <label>Aadhar Card:</label>
+                <input type="text" name="adhar_card" required>
+                <span class="error-msg" id="adhar-error"></span><br>
+            </div>
+
+            <div class="input-group">
+                <label>PAN Card:</label>
+                <input type="text" name="pan_card" required>
+                <span class="error-msg" id="pan-error"></span><br>
+            </div>
+
+            <div class="input-group">
+                <label>Has Kids:</label>
+                <select name="has_kids">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Source of Information:</label>
+                <input type="text" name="source_of_information"><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Customer Service Satisfaction:</label>
+                <textarea name="customer_service_satisfaction"></textarea><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Claim Satisfaction:</label>
+                <textarea name="claim_satisfaction"></textarea><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Interested Insurance Areas:</label>
+                <input type="text" name="insurance_markup_area"><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Policies Presented by Agent:</label>
+                <input type="text" name="agent_visited_policy"><br>
+            </div>
+
+            <div class="input-group half-width">
+                <label>Willing to Purchase Insurance:</label>
+                <select name="willingness_to_purchase">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+            </div>
+
+            <div class="input-group half-width">
+                <label>Willing to Switch Insurance:</label>
+                <select name="willingness_to_switch">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Customer Preferences:</label>
+                <textarea name="customer_preferences"></textarea><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Existing Insurance Company Name:</label>
+                <input type="text" name="existing_company_name"><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Existing Insurance Name:</label>
+                <input type="text" name="existing_insurance_name"><br>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Claim Status:</label>
+                <input type="text" name="existing_claim_status"><br>
+            </div>
+
+            <button type="submit">ADD</button>
+        </form>
+    </div>
+
+    <script>
+        function validateField(field, value, errorElementId) {
+            let clientValidationPassed = true;
+            let clientMessage = '';
+
+            if (field === 'phone') {
+                if (!/^\d{10}$/.test(value)) {
+                    clientMessage = 'Phone must be exactly 10 digits.';
+                    clientValidationPassed = false;
+                }
+            } else if (field === 'adhar_card') {
+                if (!/^\d{12}$/.test(value)) {
+                    clientMessage = 'Aadhaar must be exactly 12 digits.';
+                    clientValidationPassed = false;
+                }
+            } else if (field === 'pan_card') {
+                if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value)) {
+                    clientMessage = 'Invalid PAN format (e.g., ABCDE1234F).';
+                    clientValidationPassed = false;
+                }
+            }
+
+            if (!clientValidationPassed) {
+                $(`#${errorElementId}`).text(clientMessage);
+                return;
+            } else {
+                $(`#${errorElementId}`).text('');
+            }
+
+            $.ajax({
+                url: "{% url 'validate_customer_field' %}",
+                data: {
+                    'field': field,
+                    'value': value
+                },
+                success: function(data) {
+                    if (!data.is_valid) {
+                        $(`#${errorElementId}`).text(data.message);
+                    } else {
+                        $(`#${errorElementId}`).text('');
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('input[name=phone]').on('blur', function() {
+                validateField('phone', $(this).val(), 'phone-error');
+            });
+
+            $('input[name=adhar_card]').on('blur', function() {
+                validateField('adhar_card', $(this).val(), 'adhar-error');
+            });
+
+            $('input[name=pan_card]').on('blur', function() {
+                validateField('pan_card', $(this).val(), 'pan-error');
+            });
+        });
+    </script>
+
+{% endblock %}

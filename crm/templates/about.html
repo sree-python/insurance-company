@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About SureCover Insurance</title>
+  {% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100%;
+      color: #fff;
+      scroll-behavior: smooth;
+      background-color: #111;
+    }
+
+
+    nav.navbar {
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    #logo-img {
+      height: 50px;
+    }
+
+    .navbar-toggler {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: #ffd700;
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-toggler {
+        display: block;
+      }
+
+      .navbar-nav {
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.95);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        display: none;
+        padding: 20px;
+        border-radius: 0 0 0 10px;
+      }
+
+      .navbar-nav.show {
+        display: flex;
+      }
+    }
+
+
+    .about-container {
+      background-image: url("{% static 'image/about.png' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 60px 30px;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      text-align: center;
+      color: #ffd700;
+      margin-bottom: 40px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    section h2 {
+      font-size: 1.8em;
+      border-left: 5px solid #ffd700;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    section p {
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+
+    .values-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .values-list li {
+      margin: 8px 0;
+    }
+
+    .values-list li::before {
+      content: "•";
+      color: #ffd700;
+      margin-right: 10px;
+    }
+
+    .cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta a {
+      background-color: #ffd700;
+      color: #000;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta a:hover {
+      background-color: #e6c200;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="#"><img src="{% static 'image/logo.png' %}" alt="SureCover Logo" id="logo-img"></a>
+    <button class="navbar-toggler" onclick="toggleMenu()">☰</button>
+    <ul class="navbar-nav" id="navbarMenu">
+      <li><a class="nav-link" href="{% url 'home' %}">HOME</a></li>
+      <li><a class="nav-link" href="{% url 'loginfn' %}">LOGIN</a></li>
+    </ul>
+  </nav>
+
+  <div class="about-container">
+    <div class="overlay">
+      <h1>About SureCover Insurance</h1>
+
+      <section>
+        <h2>Who We Are</h2>
+        <p>SureCover Insurance is a leading provider of personalized insurance solutions, serving individuals, families, and businesses nationwide...</p>
+      </section>
+
+      <section>
+        <h2>Our History</h2>
+        <p>Established in 1998, SureCover started as a local insurer...</p>
+      </section>
+
+      <section>
+        <h2>Our Vision</h2>
+        <p>To redefine insurance by making protection smarter, more compassionate, and more accessible...</p>
+      </section>
+
+      <section>
+        <h2>Our Mission</h2>
+        <p>We are committed to delivering reliable, transparent, and flexible insurance coverage...</p>
+      </section>
+
+      <section>
+        <h2>Our Core Values</h2>
+        <ul class="values-list">
+          <li>Integrity – We do what’s right, always.</li>
+          <li>Transparency – No hidden terms or surprises.</li>
+          <li>Empathy – We listen, understand, and act with care.</li>
+          <li>Innovation – We constantly evolve to serve better.</li>
+          <li>Community – We give back and grow together.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Leadership</h2>
+        <p>Our leadership team brings together industry veterans, technology innovators, and client-service champions...</p>
+      </section>
+
+      <div class="cta">
+        <p>Ready to protect what matters most?</p>
+        <a href="{% url 'loginfn' %}">Get started</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 SureCover Insurance. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navbarMenu").classList.toggle("show");
+    }
+  </script>
+
+</body>
+</html>

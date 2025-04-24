@@ -1,0 +1,80 @@
+{% extends 'agent_nav.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background-color: #f0f2f5;
+        font-family: Arial, sans-serif;
+        height:100vh;
+        background-color: #8BC6EC;
+      
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .client-card {
+        background-color: white;
+        width: 300px;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+
+    .client-card:hover {
+        transform: scale(1.02);
+    }
+
+    .client-card h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .client-info {
+        margin: 10px 0;
+        color: #555;
+    }
+
+    .view-button {
+        margin-top: 15px;
+        background-color: #4A90E2;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        display: block;
+        width: 100%;
+        text-decoration: none;
+    }
+
+    .view-button:hover {
+        background-color: #357ABD;
+    }
+
+</style>
+
+<h2 style="text-align: center; margin-top: 20px;">Client List</h2>
+
+<div class="card-container">
+    {% for client in clients %}
+    <div class="client-card">
+        <h3>{{ client.name }}</h3>
+        <div class="client-info"><strong>Phone:</strong> {{ client.phone }}</div>
+        <div class="client-info"><strong>Age:</strong> {{ client.age }}</div>
+        <a href="{% url 'client_detail' client.id %}" class="view-button">View Details</a>
+    </div>
+    {% empty %}
+    <p style="text-align:center;">No clients found.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
