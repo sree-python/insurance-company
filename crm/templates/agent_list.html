@@ -142,7 +142,7 @@
                 </div>
                 <div class="card-buttons">
                     <a href="{% url 'agent_detail' agent.id %}" class="btn-card">PROFILE</a>
-                    <a href="{% url 'delete_agent' agent.id %}" class="btn-card">DELETE</a>
+                    <a href="{% url 'delete_agent' agent.user.id %}" class="btn-card">DELETE</a>
                 </div>
             </div>
             {% endfor %}

@@ -56,7 +56,7 @@ def add_agent(request):
         country = request.POST.get('country')
         pin_code = request.POST.get('pin_code')
         password = str(random.randint(100000, 999999))
-        user = User.objects.create_user(username=userName, email=email, first_name=firstName, last_name=lastName, password=password)
+        user = User.objects.create(username=userName, email=email, first_name=firstName, last_name=lastName, password=password)
         user.save()
         Agent.objects.create(address=address,phone=phone,profileimage=image,user=user,location=location,age=age,gender=gender,state=state,country=country,pin_code=pin_code)
         subject = 'Agent Account Created'
@@ -171,7 +171,7 @@ def agent_edit(request, agent_id):
     return render(request, 'agent_edit.html', {'agent': agent})
 
 def delete_agent(request, agent_id):
-    agent = get_object_or_404(Agent, id=agent_id)
+    agent =User.objects.get(id=agent_id)
     agent.delete()
     return redirect('agent_list')
 
